@@ -1,0 +1,9 @@
+relayhost = smtp.mail.me.com:587
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_sasl_mechanism_filter = login
+smtp_tls_security_level = encrypt
+smtp_tls_CAfile = /etc/ssl/cert.pem
+smtp_tls_wrappermode = no
+smtp_generic_maps = hash:/etc/postfix/generic
