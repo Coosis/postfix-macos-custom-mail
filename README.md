@@ -37,10 +37,30 @@ Do note for your desired send email, you must configure it using
 iCloud before you can send email using it. Otherwise, pure-icloud 
 email will work just fine.
 
-6. Run these commands:
+6. In System Settings, go to `Privacy & Security` -> `Full Disk Access`, 
+add an entry for `/usr/libexec/postfix/postfix-script`.
+You can use `Cmd+Shift+.` to show hidden files in Finder.
+
+7. Run these commands:
 ```
 sudo postmap /etc/postfix/sasl_passwd
 sudo postmap /etc/postfix/generic
 sudo postfix start
 sudo postfix reload
+```
+
+8. Install `fetchmail`:
+```bash
+brew install fetchmail
+```
+
+9. Edit `~/.fetchmailrc` to add these:
+```
+set daemon 300  # Fetch mail every 5 minutes
+set logfile .fetchmail.log
+poll imap.mail.me.com with proto IMAP
+    user "somemail@icloud.com" there with password "aaaa-bbbb-cccc-dddd" is nick here
+    ssl
+    keep
+	mda "/usr/sbin/sendmail -i %T"
 ```
